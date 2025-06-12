@@ -15,6 +15,7 @@
         "vite": "^6.2.4"
     },
     "dependencies": {
+        "@inertiajs/inertia-vue3": "^0.6.0",
         "@inertiajs/vue3": "^2.0.12",
         "@steveyuowo/vue-hot-toast": "^1.4.3",
         "@vitejs/plugin-vue": "^5.2.4",

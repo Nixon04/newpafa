@@ -5,11 +5,6 @@
 import {storeToRefs} from 'pinia';
 import { Toaster, toast } from "@steveyuowo/vue-hot-toast";
 import {useListStore} from '../statemanagement/overviewstate.js';
-// import {useLangStore} from '../statemanagement/langutil.js';
-
-
-// const langstore = useLangStore();
-// const {translateToEnglish} = langstore;
 
 
 const store = useListStore();

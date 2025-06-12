@@ -433,7 +433,7 @@ export const useListStore = defineStore('all_lists', () => {
            try{
             console.log('isloading ', isLoading.value);
             const dataset = JSON.stringify(answers.value);
-            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/senduserpost`, {
+            const response = await axios.post('/senduserpost', {
                 'data': dataset,
                 'fullname': userdetails.fullname,
                 'contact':  userdetails.contact,
