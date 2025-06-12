@@ -1,0 +1,82 @@
+@media(max-width:900px){
+    .layercenterpadding{
+     width: 100%;
+    }
+    .cardpad{
+        width: 80%;
+    }
+    .cardpad-focus{
+        width: 80%;
+     }
+     .label-success{
+        background: var(--greenstate);
+        max-width: 100%;
+        margin: auto;   
+    }
+
+    .videoflow{
+        max-width: 100%;
+    }
+.layercenterpaddingmain{
+    padding: 20px;
+    width: 90%;
+    margin: auto;
+}
+
+.dash-card{
+    padding: 10px;
+}
+
+
+.mod-bodyflex{
+    position: absolute;
+    top: auto;
+    left:inherit;
+    bottom: 0;
+    background-color: #fff;
+    width: 100%;
+    transform: translateY(100%);
+    z-index: 1;
+    height: calc(100% - 10%);
+    border: 1px solid #eee;
+    border-radius: 12px;
+    transition: 0.3s all ease-in;
+    animation: slideUp 0.4s ease-in forwards;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to{
+        transform: translateY(0%);
+    }
+}
+
+
+
+}
+
+@media(max-width:500px){
+    .cardpad{
+        width: 100%;
+    }
+
+    .videoflow{
+        max-width: 100%;
+    }
+    .cardpad-focus{
+       width: 100%;
+    }
+    .label-success{
+        background: var(--greenstate);
+        max-width: 100%;
+        margin: auto;   
+    }
+
+.layercenterpaddingmain{
+    padding: 20px;
+    width: 100%;
+    margin: auto;
+}
+}
