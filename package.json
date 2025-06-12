@@ -16,8 +16,10 @@
     },
     "dependencies": {
         "@inertiajs/vue3": "^2.0.12",
+        "@steveyuowo/vue-hot-toast": "^1.4.3",
         "@vitejs/plugin-vue": "^5.2.4",
         "bootstrap": "^5.3.6",
+        "libphonenumber-js": "^1.12.9",
         "pinia": "^3.0.3"
     }
 }

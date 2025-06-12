@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Toaster, toast } from "@steveyuowo/vue-hot-toast";
 import "@steveyuowo/vue-hot-toast/vue-hot-toast.css";
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
-import { Inertia } from '@inertiajs/inertia';
 
 export const useListStore = defineStore('all_lists', () => {
     const count = ref(0);
