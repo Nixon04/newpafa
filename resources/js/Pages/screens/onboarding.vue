@@ -29,6 +29,7 @@
                 </div>
             </div>
           </section>
+          
             <div class="third-slide">
                 <div class="d-flex justify-content-between">
                     <div class="d-flex">
