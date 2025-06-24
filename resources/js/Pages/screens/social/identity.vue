@@ -16,7 +16,7 @@ const {sociallinks, main} = storeToRefs(store);
                 <div class="logoimg">
                     <img :src="getstate('PAFALOGO.png')" alt="_image" class="img-logo">
                   </div>
-                  <h6>complete  </h6>
+                  <h6>complete</h6>
               </div>
               <div class="layerbetween layer">
                 <div class="p-2 align-items-center d-flex justify-content-center ">

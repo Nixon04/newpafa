@@ -20,6 +20,84 @@
     overflow: hidden;
 }
 
+
+/* sleek new landing page */
+
+.launching-headercontainer{
+    padding: 2px;
+    overflow: auto;
+}
+.content-state{
+ height: 80px;
+}
+.hero-section-cont{
+    height: auto;
+}
+.action-button{
+    border: none;
+    padding: 10px 40px;
+    border-radius: 8px;
+    background: var(--orangestate);
+    color: var(--whitestate);
+    transition: all 0.3s ease-in;
+}
+.img-fluid-state{
+    width: 100%;
+    height: calc(100vh - 100px);
+    object-fit: fill;
+    border-radius: 4px;
+}
+.bord-none{
+  border: none;
+}
+.action-button:hover{
+    background: transparent;
+    border: 1px solid var(--orangestate);
+    color: #000;
+}
+.action-button:active{
+  transform: scale(0.98);
+}
+.img-refine{
+ border-radius: 12px;
+}
+.bg-label-success{
+    background: rgb(231, 255, 231);
+    width: 100px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+.bg-label-success > span{
+    font-size: 14px;
+}
+
+.pafa-large{
+    font-size: 5rem;
+}
+.h-auto-first{
+    height: calc(100% - 20px);
+    overflow-y: auto;
+}
+
+.h-auto-second{
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px;
+}
+
+.h-auto-between{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+
 .header-brand {
     font-family: "Gabriela", serif;
     font-weight: 700;
@@ -102,6 +180,9 @@
 }
 .resetphase{
     cursor: pointer;
+    padding: 10px 20px;
+    border: 1px solid var(--hoversim);
+    border-radius: 8px;
 }
 
 .third-slide{
@@ -383,3 +464,6 @@ Modal view collections
     align-items: start;
     text-align: start;
 }
+
+
+

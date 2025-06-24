@@ -13,7 +13,10 @@
         max-width: 100%;
         margin: auto;   
     }
-
+    .pafa-large{
+        font-size: 3rem;
+    }
+    
     .videoflow{
         max-width: 100%;
     }

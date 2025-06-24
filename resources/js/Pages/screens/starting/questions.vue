@@ -45,17 +45,23 @@ const getstate = (filename) => `/images/${filename}`;
                 <div class="logoimg">
                     <img :src="getstate('PAFALOGO.png')" alt="_image" class="img-logo">
                   </div>
-                  <div @click="ResetQuestion()" class="resetphase">Reset</div>
-                  <!-- <div @click="translateToEnglish()" class="resetphase">English</div> -->
+                  <div class="d-flex gap-4 align-items-center ">
+                    <div @click="ResetQuestion()" class="resetphase">Reset</div>
+
+                  <select class="form-select w-50" v-model="store.switchlanguage">
+                    <option :value="false">English</option>
+                    <option :value="true">Français</option>
+                   </select> 
+
+
+                  </div>
+
               </div>
               <div class="layerbetween layer">
 
                 <!-- {{ answers }}
 
                 <button @click="clearAnswers()">Delete all</button> -->
-
-        
-
                 <div class="p-2 align-items-center d-flex justify-content-center ">
                     <div v-if="currentstep == '0'">
                         <h4 class="font-level">Who are you signing up for?</h4>

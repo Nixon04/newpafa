@@ -11,6 +11,7 @@ Route::controller(AllRoutes::class)->group(function(){
     Route::post('/senduserpost', 'PostAnswers');
     Route::get('/screens/starting/description', 'DescriptionVideo');
     Route::get('/screens/social/identity', 'SocialReach');
+    Route::get('/langpreference', 'LangPreference');
   });
 
 

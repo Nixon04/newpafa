@@ -20,6 +20,10 @@ class AllRoutes extends Controller
         return Inertia::render('screens/starting/questions');
     }
 
+    public function LangPreference(){
+        return Inertia::render('screens/starting/langpreference');
+    }
+
     public function SocialReach(){
         return Inertia::render('screens/social/identity');
     }
