@@ -26,6 +26,7 @@
 .launching-headercontainer{
     padding: 2px;
     overflow: auto;
+    height: 100vh;
 }
 .content-state{
  height: 80px;
@@ -466,5 +467,38 @@ Modal view collections
     text-align: start;
 }
 
+.privacy-container{
+    display: flex;
+    overflow-y: auto;
+    height: 100vh;
+}
+.privacy-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 60%;
+}
 
+.change_state-container{
+    margin: 0;
+    width: 100%;
+}
+.change-state-mood{
+    display: flex;
+    gap: 12px;
+}
+
+.state-active-border{
+    border-bottom: 2px solid var(--orangestate);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.state-none-active{
+ cursor: pointer;
+ 
+}
 

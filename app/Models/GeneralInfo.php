@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class GeneralInfo extends Model
 {
     protected $fillable = [
-        'fullname',
+    'fullname',
     'contact',
     'email',
     'members',
+    'reference',
     'reg_date',
     ];
 }
+

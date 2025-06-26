@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string('contact');
             $table->string('email');
             $table->string('members');
+            $table->string('reference');
             $table->string('reg_date');
             $table->timestamps();
         });
+
     }
 
     /**

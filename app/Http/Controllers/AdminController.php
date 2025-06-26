@@ -6,25 +6,46 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\GeneralInfo;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Information;
 use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 {
 
-
     public function checkVpn(Request $request)
-        {
-            try{
-                $response = Http::get('https://vpnapi.io/api/?key=6d64b1fcc9ab492686d0b45bbee0ad84');
-            return response()->json($response->json());
-            }
-            catch(\Exception $e){
+    {
+        try {
+            $ip = app()->environment('local') ? '102.90.117.42' : $request->ip();
+            
+            $cache_key = "check" .$ip;
+            $fetch_api = "cache";
+
+            $data = Cache::remember($cache_key, now()->addHours(6), function () use ($ip){
+                $fetch_api = "api";
+                $response = Http::get("https://vpnapi.io/api/{$ip}?key=" .env('VPNAPIKEY'));
+                return $response->successful() ? $response->json() : null;
+            });
+
+            if(!$data){
                 return response()->json([
-                    'message' => $e->getMessage(),
+                    'message' => "Response Not found",
+                    'status' => 'error',
                 ]);
             }
+
+             Log::info('CheckVPN', ['ip' => $ip, [  'fetch_from' => $fetch_api, 'vpn_data' => $data,]]);
+            return response()->json($data);
+
+        } catch (\Exception $e) {
+            Log::info('CheckVpn', ['status' => $e->getMessage()]);
+            return response()->json([
+                'message' => $e->getMessage(),
+            ]);
         }
+    }
+    
 
     public function GetListedMembers(Request $request){
         $request->validate([

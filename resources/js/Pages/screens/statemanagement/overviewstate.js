@@ -39,10 +39,10 @@ export const useListStore = defineStore('all_lists', () => {
         }
       });
       if (response.status === 200) {
-        ip.value = response.data.ip;
-        vpn.value = response.data.security.vpn;
-        country.value = response.data.location.country;
-        country_code.value = response.data.location.country_code;
+        ip.value = response.data?.ip ?? '';
+        vpn.value = response.data.security?.vpn ?? '';
+        country.value = response.data.location?.country ?? '';
+        country_code.value = response.data.location?.country_code ?? '';
 
         if(vpn.value == true){
             toast.error('Please Disable your VPN, to continue to the end successful');
@@ -52,9 +52,7 @@ export const useListStore = defineStore('all_lists', () => {
       else{
         console.log('Not Successful');
       }
-    } catch (error) {
-      console.error('Unsuccessful request or network error:', error.message);
-    }
+    } 
     finally{
       isPosVisible.value = false;
     }

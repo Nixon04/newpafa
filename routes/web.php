@@ -12,6 +12,9 @@ Route::controller(AllRoutes::class)->group(function(){
     Route::get('/screens/starting/description', 'DescriptionVideo');
     Route::get('/screens/social/identity', 'SocialReach');
     Route::get('/langpreference', 'LangPreference');
+    Route::get('/resumepayment/initialize/{id}', 'ResumePayment');
+    Route::get('/mail','MailDesign');
+    Route::get('/privacy','Privacy');
   });
 
 
