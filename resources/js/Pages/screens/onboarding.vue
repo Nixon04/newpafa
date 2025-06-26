@@ -82,7 +82,7 @@ const listStore = useListStore();
               <div class="col-lg-5 col md-6 col-12">
                  <div class="card bord-none">
                   <img 
-                  :src="imagesPort('pafa3image.png')"
+                  :src="imagesPort('pafamain.png')"
                    class="img-fluid-state img-refine"
                   alt="">
                  </div>
