@@ -1,6 +1,6 @@
 <script setup>
 const imagesPort = (filename) => `/images/${filename}`;
-import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3';
 
 import {useListStore} from './statemanagement/overviewstate.js';
 const listStore = useListStore();

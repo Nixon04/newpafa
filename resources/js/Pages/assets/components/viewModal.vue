@@ -1,6 +1,5 @@
 <script setup>
-
-const { UnClickActive, viewlists,  } = defineProps(['UnClickActive', 'viewlists',]);
+const { UnClickActive, viewlists } = defineProps(['UnClickActive', 'viewlists',]);
 </script>
 <template>
     <div>

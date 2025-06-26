@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, watch, reactive, computed } from 'vue';
 import axios from 'axios';
-import { Toaster, toast } from "@steveyuowo/vue-hot-toast";
+import {toast } from "@steveyuowo/vue-hot-toast";
 import "@steveyuowo/vue-hot-toast/vue-hot-toast.css";
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
@@ -16,11 +16,51 @@ export const useListStore = defineStore('all_lists', () => {
 
   const changeLanguage = () => {
     switchlanguage.value = !switchlanguage.value;
+    localStorage.removeItem('answers');
   };
 
   watch (switchlanguage, (newlang) =>{
     localStorage.setItem('switchlanguage', newlang);
   })
+
+
+  const ip = ref('');
+  const vpn = ref('');
+  const country = ref('');
+  const country_code = ref('');
+  const isPosVisible = ref(false);
+
+  const alertforvpn = async (_csrf) => {
+    try {
+      isPosVisible.value = true;
+      const response = await axios.post('/checkvpn', {
+        headers:{   
+            'X-CSRF-TOKEN': _csrf
+        }
+      });
+      if (response.status === 200) {
+        ip.value = response.data.ip;
+        vpn.value = response.data.security.vpn;
+        country.value = response.data.location.country;
+        country_code.value = response.data.location.country_code;
+
+        if(vpn.value == true){
+            toast.error('Please Disable your VPN, to continue to the end successful');
+            return;
+        }
+      }
+      else{
+        console.log('Not Successful');
+      }
+    } catch (error) {
+      console.error('Unsuccessful request or network error:', error.message);
+    }
+    finally{
+      isPosVisible.value = false;
+    }
+  };
+  
+
 
   const translations = {
     en: {
@@ -56,6 +96,12 @@ export const useListStore = defineStore('all_lists', () => {
         { id: 2, name: 'Yes, but I may need reminders' },
         { id: 3, name: 'Not sure' },
       ],
+      sevenquestion: [
+        { id: 1, name: 'facebook' },
+        { id: 2, name: 'Google search' },
+        { id: 3, name: 'A friend' },
+        { id: 4, name: 'Instagram' },
+      ],
     },
     fr: {
       firstquestions: [
@@ -90,6 +136,12 @@ export const useListStore = defineStore('all_lists', () => {
         { id: 2, name: "Oui, mais j'ai besoin de rappels" },
         { id: 3, name: 'Pas sûr' },
       ],
+      sevenquestion: [
+        { id: 1, name: 'Facebook' },
+        { id: 2, name: 'Recherche Google' },
+        { id: 3, name: 'Un ami' },
+        { id: 4, name: 'Instagram' },
+      ],
     },
   };
 
@@ -100,11 +152,12 @@ export const useListStore = defineStore('all_lists', () => {
   const forthquestion = computed(() => translations[lang.value].forthquestion);
   const fifthquestion = computed(() => translations[lang.value].fifthquestion);
   const sixquestion = computed(() => translations[lang.value].sixquestion);
+  const sevenquestion = computed(() => translations[lang.value].sevenquestion);
 
   function nextstop() {
     if (currentstep.value >= 6) {
       currentstep.value = 6;
-      answers.value[6] = number.value;
+    //   answers.value[6] = number.value;
     }
     currentstep.value++;
   }
@@ -116,7 +169,7 @@ export const useListStore = defineStore('all_lists', () => {
   watch([answers, number], ([newval, newNumber]) => {
     localStorage.setItem('answers', JSON.stringify(newval));
     if (currentstep.value === 6) {
-      answers.value[6] = newNumber;
+    //   answers.value[6] = newNumber;
     }
   }, { deep: true });
 
@@ -128,9 +181,9 @@ export const useListStore = defineStore('all_lists', () => {
   const storedAnswers = localStorage.getItem('answers');
   if (storedAnswers) {
     answers.value = JSON.parse(storedAnswers);
-    if (answers.value[6]) {
-      number.value = answers.value[6];
-    }
+    // if (answers.value[6]) {
+    //   number.value = answers.value[6];
+    // }
   }
 
   function updateAnswer() {
@@ -409,7 +462,7 @@ export const useListStore = defineStore('all_lists', () => {
         toast.success(response.data.message);
         clearAnswers();
         setTimeout(() => {
-          window.location = "/screens/starting/description";
+          window.location = "/screens/starting/description";f
         }, 3000);
       } else {
         toast.error(response.data.message);
@@ -432,6 +485,7 @@ export const useListStore = defineStore('all_lists', () => {
     forthquestion,
     fifthquestion,
     sixquestion,
+    sevenquestion,
     currentstep,
     nextstop,
     ResetQuestion,
@@ -440,6 +494,11 @@ export const useListStore = defineStore('all_lists', () => {
     updateAnswer,
     changeLanguage,
     switchlanguage,
+    alertforvpn,
+    ip,
+    vpn,
+    country,
+    country_code,
     answers,
     number,
     userdetails,
@@ -447,5 +506,6 @@ export const useListStore = defineStore('all_lists', () => {
     countries,
     changeindex,
     indexstatus,
+    isPosVisible,
   };
 });

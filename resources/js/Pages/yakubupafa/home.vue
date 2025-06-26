@@ -1,16 +1,19 @@
 <script setup>
     import NavbarBody from '../assets/components/dash/header.vue';
     import ViewModal from '../assets/components/viewModal.vue';
-    import {useTable} from '../screens/statemanagement/table.js';
-    import {useList} from '../screens/statemanagement/viewlist.js';
-    import { usePage } from '@inertiajs/inertia-vue3';
+    import {useList} from '../screens/statemanagement/viewlist.ts';
+    import { usePage } from '@inertiajs/vue3';
     import { storeToRefs } from 'pinia';
     import { onMounted } from 'vue';
     const page = usePage();
-    
-    const useTableState = useTable();
+
+    // second function 
+    const useViewState = useList();
+
+    useViewState.setData(page.props?.data);
+
     const {
-    data,
+        data,
     searchQuery ,
     rowsPerPage,
     currentPage ,
@@ -18,19 +21,6 @@
     isLoading,
     paginatedData,
     noResults,
-    } = storeToRefs(useTableState);
-    
-    const {
-    prevPage,
-    changevaluestate,
-    } = useTableState;
-
-    useTableState.setData(page.props?.data);
-    
-    
-    const useViewState = useList();
-    
-    const {
         isVisible,
         viewlists,
         datacall,
@@ -42,23 +32,27 @@
     const {
         viewListData,
         UnClickActive,
+        prevPage,
+        changevaluestate,
+        nextPage,
     } = useViewState;
 
+    onMounted(()=> {
+        useViewState.initFromProps('1','2','3','4');
+    })
 
-    
-    
-    
     </script>
     
     <template>
         <div>
-            <ViewModal v-if="isVisible" :UnClickActive="UnClickActive" :viewlists="viewlists" :questionsChart="questionsChart"/>
+            <ViewModal v-if="isVisible" :UnClickActive="UnClickActive" :viewlists="viewlists"/>
             <NavbarBody/>
             <div class="dash-main">
                 <div class="dash-header">
-                  <h1>Hey Yakubu </h1>
+                  <h1>Hey Yakubu  </h1>
                 </div>
-    
+
+
     
                 <div class="row gy-1 gx-1">
                     <div class="col-lg-4 col-md-4 col-12">
@@ -74,7 +68,7 @@
                                 <span>Total Revenue</span>
                             </div>
                             <div class="dashhead-value">
-                                <span class="bash-f1">{{paid ? paid : '0'}}</span>
+                                <span class="bash-f1">{{paid ? paid * 2500 : '0'}}</span>
                             </div>
                         </div>
                     </div>
@@ -110,7 +104,7 @@
                                 <span>Paid</span>
                             </div>
                             <div class="dashhead-value">
-                                <span class="bash-f1">{{paid ? '' : '0'}}</span>
+                                <span class="bash-f1">{{paid ? paid  : '0'}}</span>
                             </div>
                         </div>
                     </div>

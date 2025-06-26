@@ -16,7 +16,9 @@
     .pafa-large{
         font-size: 3rem;
     }
-    
+    .font-level{
+        font-size: 16px;
+    }
     .videoflow{
         max-width: 100%;
     }

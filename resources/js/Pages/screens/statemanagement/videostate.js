@@ -6,7 +6,6 @@ export const VideoStateManagement = defineStore('main_video', () => {
     const videoRef = ref(null);
     const timer = ref(0);
     let animationFrameId = null;
-    let showflag = false;
 
     const updateTimer = () => {
         if (videoRef.value) {
@@ -53,7 +52,6 @@ export const VideoStateManagement = defineStore('main_video', () => {
         }
     };
 
-    // 🔥 WATCH for `videoRef` when it's assigned in the template
     watch(videoRef, (newVal) => {
         if (newVal) {
             addEventListeners();

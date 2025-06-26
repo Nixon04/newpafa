@@ -227,11 +227,12 @@
     width: 100%;
 }
 .layertop, .layerbetween, .layerbottom{
-    height: 10vh;
+    height: 100px;
     left: 0;
     right: 0;
     z-index: 99;
     position: fixed;
+    overflow: visible;
 }
 .layertop{
     top: 0;

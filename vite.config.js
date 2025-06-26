@@ -2,11 +2,14 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
+import ip from 'ip';
+import path from 'path';
 
 export default defineConfig({
     
     build: {
         sourcemap: true,
+        minify: true,
         chunkSizeWarningLimit: 1600, // Adjust the limit as necessary
         rollupOptions: {
             output: {
@@ -19,6 +22,12 @@ export default defineConfig({
             }
         }
     },
+
+    resolve:{
+        alias: {
+            '@' : path.resolve(__dirname, 'resources/js'),
+        },
+    },
     plugins: [
         vue(),
         laravel({
@@ -26,6 +35,10 @@ export default defineConfig({
             refresh: true,
         }),
         tailwindcss(),
-       
     ],
+
+    // server:{
+    //     host: ip.address(),
+    //     port: '5713',
+    // }
 });

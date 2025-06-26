@@ -7,9 +7,24 @@ use Inertia\Inertia;
 use App\Models\GeneralInfo;
 use Illuminate\Support\Facades\DB;
 use App\Models\Information;
+use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 {
+
+
+    public function checkVpn(Request $request)
+        {
+            try{
+                $response = Http::get('https://vpnapi.io/api/?key=6d64b1fcc9ab492686d0b45bbee0ad84');
+            return response()->json($response->json());
+            }
+            catch(\Exception $e){
+                return response()->json([
+                    'message' => $e->getMessage(),
+                ]);
+            }
+        }
 
     public function GetListedMembers(Request $request){
         $request->validate([
