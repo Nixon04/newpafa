@@ -52,7 +52,7 @@ const listStore = useListStore();
                     <div class="card-headertext mb-3 px-3">
                       <h1 class="pafa-large">Welcome To Our Launching Event</h1>
                       <span> <span class="text-decoration-underline cursor-cell">PayAfricaForArt</span> is hosting an art audiction and special training to 
-                        african's all over Africa, to be well groomed to showcase our origin 
+                        African's all over Africa, to be well groomed to showcase our origin 
                         heritage with pride, be part of us today.
                       </span>
                     </div>
