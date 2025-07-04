@@ -130,7 +130,7 @@ onMounted(() => {
                       
                       <div v-if="currentstep == '6'">
                         <h4 class="font-level">
-                          {{ store.switchlanguage ? 'Entrez votre réponse' : 'Give the answer' }}
+                          {{ store.switchlanguage ? 'Comment avez-vous entendu parler de nous ?' : 'How did you hear about us?' }}
                         </h4>
                       </div>
                       

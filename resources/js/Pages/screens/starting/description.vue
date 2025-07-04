@@ -35,7 +35,7 @@ onMounted(() => {
                 </div>
                 <Link href="/screens/social/identity">
                 <div v-if="timer > 5">
-                    <button class="btn-pafa py-3">Proceed Now</button>
+                    <span class="fs-1">🎉</span>
                 </div>
             </Link>
             </div>
@@ -54,17 +54,17 @@ onMounted(() => {
                         disablepictureinpicture
                         oncontextmenu="return false"
                         @fullscreenchange.prevent
-                        class="videoflow"
+                        class="videoflow rounded"
                     ></video>
 
 
                     <div>
-                        <button @click="paymentstate.StandardPayment(page.props?.id, page.props?.csrf_token)" class="btn-pafa py-3 float-right bg-dark">
+                        <button @click="paymentstate.StandardPayment(page.props?.id, page.props?.csrf_token)" class="btn-pafa py-3 w-100 float-right bg-dark">
                             <template v-if="paymentstate.isLoading">
-                               <span>...</span>
+                               <span>Loading ...</span>
                             </template>    
                            <template v-else>
-                            <span> Proceed Now</span>
+                            <span> Pay Now and Get Enlisted</span>
                            </template>
                         </button>
                     </div>

@@ -30,14 +30,14 @@ const { UnClickActive, viewlists } = defineProps(['UnClickActive', 'viewlists',]
                                   <template v-if="index == 4">
                                     <span  class="fs-4">Have you ever tried drawing or visual exercises before?</span>
                                   </template>
-                                  <template v-if="index == 6">
+                                  <template v-if="index == 5">
                                     <span  class="fs-4">If this program helps you or your child think faster and learn better, will you commit just a few minutes daily for 30 days?</span>
                                   </template>
-                                  <template v-if="index == 7">
-                                    <span  class="fs-4">Give the answer</span>
+                                  <template v-if="index == 6">
+                                    <span  class="fs-4">How did you hear about us?</span>
                                   </template>
                                 <br/>
-                                 <span class="fetchhighlight">*{{ item.data }}</span>
+                                 <span class="fetchhighlight text-decoration-underline">*{{ item.data }}</span>
                                 <br/> <br/>
                             </div>
                         </div>

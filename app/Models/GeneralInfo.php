@@ -11,6 +11,7 @@ class GeneralInfo extends Model
     'contact',
     'email',
     'members',
+    'paid',
     'reference',
     'reg_date',
     ];

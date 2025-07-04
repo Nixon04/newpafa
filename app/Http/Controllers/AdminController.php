@@ -17,7 +17,8 @@ class AdminController extends Controller
     public function checkVpn(Request $request)
     {
         try {
-            $ip = app()->environment('local') ? '102.90.117.42' : $request->ip();
+            // $ip = app()->environment('local') ? '102.90.117.42' : $request->ip();
+            $ip = $request->ip();
             
             $cache_key = "check" .$ip;
             $fetch_api = "cache";

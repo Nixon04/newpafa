@@ -82,6 +82,7 @@ class AllRoutes extends Controller
             'fullname' => $request->input('fullname'), 
             'contact' => $request->input('contact'), 
             'email' => $request->input('email'), 
+            'paid' => '0',
             'members' => $request->input('members') ?? '0',
             'reference' => $referenceid,
             'reg_date' => $date, 
@@ -139,7 +140,7 @@ class AllRoutes extends Controller
             'amount' => $request->input('amount'),
             'tx_ref' => $ref,
             'currency' => 'NGN',
-            'redirect_url' => 'http://127.0.0.1:8000/screens/social/identity',
+            'redirect_url' => 'http://127.0.0.1:8000/screens/starting/description/'.$id,
             'customer'=> [
                 'email' => $email,
                 'name' => $fullname,

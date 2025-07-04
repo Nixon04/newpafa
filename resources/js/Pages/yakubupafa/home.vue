@@ -38,7 +38,7 @@
     } = useViewState;
 
     onMounted(()=> {
-        useViewState.initFromProps('1','2','3','4');
+        useViewState.initFromProps(page.props?.data,page.props?.general,page.props?.paid,page.props?.totalUsers);
     })
 
     </script>
@@ -86,7 +86,7 @@
                                 <span>Total Users</span>
                             </div>
                             <div class="dashhead-value">
-                                <span class="bash-f1">{{totalUsers}}</span>
+                                <span class="bash-f1">{{totalUsers ? totalUsers : '0'}}</span>
                             </div>
                         </div>
                     </div>
