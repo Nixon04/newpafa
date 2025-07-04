@@ -1,17 +1,26 @@
 <script setup>
 import { VideoStateManagement } from '../statemanagement/videostate.js';
+import {usePaymentMethod} from '../statemanagement/payment.js';
+
 import { storeToRefs } from 'pinia';
 import { ref, onMounted } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3'
 const getstate = (filename) => `/images/${filename}`;
 const getvideo = (filename) => `/video/${filename}`;
 
 const store = VideoStateManagement();
 const { timer, videoRef } = storeToRefs(store);
-
+const paymentstate = usePaymentMethod();
 const localVideoRef = ref(null);
 
+const page = usePage();
+
 onMounted(() => {
+    // const script = document.createElement('script');
+    // script.src = "https://checkout.flutterwave.com/v3.js";
+    // script.async = true;
+    // document.body.appendChild(script);
     videoRef.value = localVideoRef.value; // Assign ref correctly after mount
 });
 </script>
@@ -30,14 +39,9 @@ onMounted(() => {
                 </div>
             </Link>
             </div>
+           
 
-            <div class="layerbetween layer">
-                <div class="text-center">
-                    <h6>Video Demonstration</h6>
-                </div>
-            </div>
-
-            <div class="layercenter layer">
+            <div class="padding-layertop layer">
                 <div class="layercenterpadding">
                     <!-- Video with ref to autoplay -->
                     <video 
@@ -53,8 +57,16 @@ onMounted(() => {
                         class="videoflow"
                     ></video>
 
-                    <div class="label-success">
-                        <h5>Time Count is {{ timer }} seconds</h5>
+
+                    <div>
+                        <button @click="paymentstate.StandardPayment(page.props?.id, page.props?.csrf_token)" class="btn-pafa py-3 float-right bg-dark">
+                            <template v-if="paymentstate.isLoading">
+                               <span>...</span>
+                            </template>    
+                           <template v-else>
+                            <span> Proceed Now</span>
+                           </template>
+                        </button>
                     </div>
 
                  

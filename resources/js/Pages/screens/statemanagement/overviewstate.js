@@ -458,9 +458,10 @@ export const useListStore = defineStore('all_lists', () => {
       });
       if (response.status === 200 && response.data.status === "success") {
         toast.success(response.data.message);
+        console.log('ReferenceId', response.data.reference_id);
         clearAnswers();
         setTimeout(() => {
-          window.location = "/screens/starting/description";f
+          window.location = "/screens/starting/description/" + response.data.reference_id;
         }, 3000);
       } else {
         toast.error(response.data.message);

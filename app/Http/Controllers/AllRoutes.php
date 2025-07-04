@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Information;
 use App\Mail\ReceiptId;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Client\ConnectionException;
 
 class AllRoutes extends Controller
 {
@@ -40,8 +42,10 @@ class AllRoutes extends Controller
         return Inertia::render('screens/social/identity');
     }
 
-    public function DescriptionVideo(){
-        return Inertia::render('screens/starting/description');
+    public function DescriptionVideo($id){
+        return Inertia::render('screens/starting/description', [
+            'id' => $id,
+        ]);
     }
 
     public function PostAnswers(Request $request){
@@ -88,7 +92,12 @@ class AllRoutes extends Controller
         Mail::to($request->input('email'))->send(new ReceiptId($request->input('fullname'), $referenceid));
 
         DB::commit();
-        return response()->json(['message' => 'successfully updated', 'status' => 'success']);
+        return response()->json([
+            'message' => 'successfully updated',
+            'reference_id' => $referenceid,
+            'status' => 'success'
+        ]);
+
         }catch(\Exception $e){
             Log::info('PostAnswers', ['status' => $e->getMessage(), 'line' => $e->getLine()]);
             DB::rollBack();
@@ -101,5 +110,72 @@ class AllRoutes extends Controller
     
         return Inertia::render('/resumepayment/initialize/', ['id' => $id ]);
     }
+
+
+    public function PaymentInit(Request $request){
+        $request->validate([
+            'id' => 'required',
+            'amount' => 'required|integer|min:1',
+        ]);
+         $id = $request->input('id');
+
+         $querycheck = GeneralInfo::where('reference', $id)->first();
+         if($querycheck){
+            $email = $querycheck->email;
+            $fullname = $querycheck->fullname;
+            $contact = $querycheck->contact;
+         }
+
+        try{
+            DB::beginTransaction();
+        $ref = Carbon::now()->format('YmdHis') .'_'. Str::uuid();
+
+        $headers = [
+            'Authorization' => 'Bearer '.env('FLUTTERWAVE_SECRET_KEY'),
+            'Content-Type' => 'application/json',
+        ];
+
+        $payload = [
+            'amount' => $request->input('amount'),
+            'tx_ref' => $ref,
+            'currency' => 'NGN',
+            'redirect_url' => 'http://127.0.0.1:8000/screens/social/identity',
+            'customer'=> [
+                'email' => $email,
+                'name' => $fullname,
+                'phonenumber' => $contact,
+            ],
+        ];
+
+        $response = Http::withHeaders($headers)->post('https://api.flutterwave.com/v3/payments', $payload);
+        if($response && $response->successful()){
+            DB::commit();
+            $json_message = json_decode($response->body());
+            Log::info('Link check' ,['status' => $json_message->data->link]);
+            return response()->json([
+                'message' => $json_message->data->link,
+                'status' => 'success',
+            ]);
+        }
+    }
+
+    catch(ConnectionException $e){
+        DB::rollBack();
+        return response()->json([
+            'message' => 'Network Connection',
+            'status' => 'error',
+        ]);
+    }
+
+    catch(\Exception $e){
+        DB::rollBack();
+        Log::info('PaymentInitError', ['status' => $e->getMessage(), 'line' => $e->getLine()]);
+        return response()->json([
+            'message' => 'Oops seems something went wrong',
+            'status' => 'error',
+        ]);
+    }
+
+   }
 
 }

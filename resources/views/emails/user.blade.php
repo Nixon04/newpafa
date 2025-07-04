@@ -37,7 +37,7 @@
           I just noticed you recently applied to join our program — I'm Mr. Yakubu. Congratulations on taking your first step to join this community!<br /><br />
           We've prepared some exclusive package contents just for you (and others like you). The product is entirely free, but there's a small one-time gateway fee of just <strong>$5</strong>.<br /><br />
           Feel free to reach out if you need help. To continue with the payment (if not already paid), simply click the link below:<br /><br />
-          <a href="{{ url('resumepayment/initialize/'.$usertokenline) }}" style="color: #000; text-decoration: underline;">Click here to complete payment</a>
+          <a href="{{ url('screens/starting/description/'.$usertokenline) }}" style="color: #000; text-decoration: underline;">Click here to complete payment</a>
         </td>
       </tr>
 
